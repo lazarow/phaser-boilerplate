@@ -14,7 +14,7 @@ const browserSync = require('browser-sync');
 const sass = require('gulp-sass');
 const replace = require('gulp-replace');
 
-const keepFiles = false;
+let keepFiles = false;
 const isProduction = () => argv.production;
 console.log(isProduction());
 

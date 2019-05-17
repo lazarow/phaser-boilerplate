@@ -1,5 +1,10 @@
 body {
-    background-color: #fff;
+    background-color: #000;
     padding: 0;
     margin: 0;
+}
+#content.resized {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
