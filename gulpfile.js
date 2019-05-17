@@ -12,6 +12,7 @@ const babelify = require('babelify');
 const browserify = require('browserify');
 const browserSync = require('browser-sync');
 const sass = require('gulp-sass');
+const replace = require('gulp-replace');
 
 const keepFiles = false;
 const isProduction = () => argv.production;
@@ -61,7 +62,9 @@ const build = () => {
         .pipe(gulpif(isProduction() == false, exorcist('./build/assets/js/game.map')))
         .pipe(source('game.js'))
         .pipe(buffer())
-        .pipe(gulpif(isProduction() == false, uglify()))
+        .pipe(gulpif(isProduction() == false, replace('{{ENV}}', 'dev')))
+        .pipe(gulpif(isProduction(), replace('{{ENV}}', 'prod')))
+        .pipe(gulpif(isProduction(), uglify()))
         .pipe(gulp.dest('./build/assets/js'));
 };
 gulp.task('build', ['copy-phaser'], build);
