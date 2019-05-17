@@ -36,7 +36,6 @@ function resize() {
     game.scale.setUserScale(scale, scale);
     game.renderer.renderSession.roundPixels = true;
     Phaser.Canvas.setImageRenderingCrisp(game.canvas);
-    console.log(game.canvas);
     document.getElementById('content').className = 'resized';
     document.getElementById('content').style.marginLeft = '-' + Math.floor(WIDTH * scale / 2) + 'px';
     document.getElementById('content').style.marginTop = '-' + Math.floor(HEIGHT * scale / 2) + 'px';
