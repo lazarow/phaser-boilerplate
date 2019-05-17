@@ -62,8 +62,7 @@ const build = () => {
         .pipe(gulpif(isProduction() == false, exorcist('./build/assets/js/game.map')))
         .pipe(source('game.js'))
         .pipe(buffer())
-        .pipe(gulpif(isProduction() == false, replace('{{ENV}}', 'dev')))
-        .pipe(gulpif(isProduction(), replace('{{ENV}}', 'prod')))
+        .pipe(replace('{{ENV}}', isProduction() ? 'prod' : 'dev'))
         .pipe(gulpif(isProduction(), uglify()))
         .pipe(gulp.dest('./build/assets/js'));
 };
@@ -82,7 +81,7 @@ gulp.task('serve', ['build'], () => {
         open: false
     };
     browserSync(options);
-    gulp.watch('./source/**/*.js', ['watch-scripts']);
+    gulp.watch('./scripts/**/*.js', ['watch-scripts']);
     gulp.watch('./static/**/*', ['watch-static']).on('change', () => (keepFiles = true));
     gulp.watch('./scss/*.scss', ['watch-scss']);
 });
