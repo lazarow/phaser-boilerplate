@@ -15,6 +15,7 @@ const sass = require('gulp-sass');
 
 const keepFiles = false;
 const isProduction = () => argv.production;
+console.log(isProduction());
 
 gulp.task('clean-build', () => {
     if (keepFiles === false) {
@@ -25,21 +26,21 @@ gulp.task('clean-build', () => {
 });
 
 gulp.task('copy-static', ['clean-build'], () => {
-    return gulp.src(STATIC_PATH + '/**/*').pipe(gulp.dest('./build'));
+    return gulp.src('./static/**/*').pipe(gulp.dest('./build'));
 });
 
 const compileSCSS = () => {
-    return gulp.src('./sass/*.scss').pipe(gulp.dest('./build/assets/css'));
+    return gulp.src('./scss/*.scss').pipe(sass()).pipe(gulp.dest('./build/assets/css'));
 };
 gulp.task('compile-scss', ['copy-static'], compileSCSS);
 gulp.task('fast-compile-scss', compileSCSS);
 
 gulp.task('copy-phaser', ['compile-scss'], () => {
     let files = ['phaser.min.js'];
-    if (isProduction() === false) {
+    if (isProduction() == false) {
         files.push('phaser.map', 'phaser.js');
     }
-    return gulp.src(files.map(file => './node_modules/phaser/build/' + file)).pipe(gulp.dest('./build/assets/js'));
+    return gulp.src(files.map(file => './node_modules/phaser-ce/build/' + file)).pipe(gulp.dest('./build/assets/js'));
 });
 
 const build = () => {
@@ -57,10 +58,10 @@ const build = () => {
         })
         .transform(babelify)
         .bundle()
-        .pipe(gulpif(isProduction() === false, exorcist(sourcemapPath)))
+        .pipe(gulpif(isProduction() == false, exorcist('./build/assets/js/game.map')))
         .pipe(source('game.js'))
         .pipe(buffer())
-        .pipe(gulpif(isProduction() === false, uglify()))
+        .pipe(gulpif(isProduction() == false, uglify()))
         .pipe(gulp.dest('./build/assets/js'));
 };
 gulp.task('build', ['copy-phaser'], build);
@@ -75,7 +76,7 @@ gulp.task('serve', ['build'], () => {
         server: {
             baseDir: './build'
         },
-        open: true
+        open: false
     };
     browserSync(options);
     gulp.watch('./source/**/*.js', ['watch-scripts']);
@@ -83,4 +84,4 @@ gulp.task('serve', ['build'], () => {
     gulp.watch('./scss/*.scss', ['watch-scss']);
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['serve'], () => {});
