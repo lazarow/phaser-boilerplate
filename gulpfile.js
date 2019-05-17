@@ -63,6 +63,7 @@ const build = () => {
         .pipe(source('game.js'))
         .pipe(buffer())
         .pipe(replace('{{ENV}}', isProduction() ? 'prod' : 'dev'))
+        .pipe(replace('{ASSETS_PATH}', typeof gutil.env.assets === 'undefined' ? 'assets' : gutil.env.assets))
         .pipe(gulpif(isProduction(), uglify()))
         .pipe(gulp.dest('./build/assets/js'));
 };

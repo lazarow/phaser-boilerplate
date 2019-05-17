@@ -1,5 +1,5 @@
 import Stats from 'stats.js';
-import GameState from 'states/GameState';
+import SplashState from 'states/SplashState';
 
 const WIDTH = 480;
 const HEIGHT = 270;
@@ -9,8 +9,8 @@ class Game extends Phaser.Game
 	constructor() {
 		super(WIDTH, HEIGHT, Phaser.AUTO, 'content', null);
         this.ENV = '{{ENV}}';
-		this.state.add('GameState', GameState, false);
-		this.state.start('GameState');
+		this.state.add('SplashState', SplashState, false);
+		this.state.start('SplashState');
         if (this.ENV === 'dev') {
             this.setupStatsJS();
         }
