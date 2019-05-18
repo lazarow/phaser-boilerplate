@@ -16,7 +16,6 @@ const replace = require('gulp-replace');
 
 let keepFiles = false;
 const isProduction = () => argv.production;
-console.log(isProduction());
 
 gulp.task('clean-build', () => {
     if (keepFiles === false) {
