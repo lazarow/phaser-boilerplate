@@ -6,8 +6,8 @@ import FilterTest2State from 'states/samples/FilterTest2State';
 import FilterTest3State from 'states/samples/FilterTest3State';
 // SAMPLES END
 
-const WIDTH = 480;
-const HEIGHT = 270;
+let WIDTH = 480;
+let HEIGHT = 270;
 
 class Game extends Phaser.Game
 {
@@ -38,6 +38,12 @@ class Game extends Phaser.Game
             updateLoop.apply(this, args);
             stats.end();
         };
+    }
+    resizeGame(width, height) {
+        this.scale.setGameSize(width, height);
+        WIDTH = width;
+        HEIGHT = height;
+        resize();
     }
 }
 
