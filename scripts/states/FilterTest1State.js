@@ -1,6 +1,6 @@
 import SplashState from './SplashState';
 
-class FilterTestState extends SplashState
+class FilterTest1State extends SplashState
 {
     create() {
         super.create();
@@ -23,4 +23,4 @@ void main( void ) {
     }
 }
 
-export default FilterTestState;
+export default FilterTest1State;
