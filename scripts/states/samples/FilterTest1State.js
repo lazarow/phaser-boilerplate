@@ -1,4 +1,4 @@
-import SplashState from './SplashState';
+import SplashState from './../SplashState';
 
 class FilterTest1State extends SplashState
 {

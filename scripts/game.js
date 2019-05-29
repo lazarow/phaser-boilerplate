@@ -1,7 +1,9 @@
 import Stats from 'stats.js';
 import SplashState from 'states/SplashState';
-import FilterTest1State from 'states/FilterTest1State';
-import FilterTest2State from 'states/FilterTest2State';
+// SAMPLES BEGIN - remove this part when u start working on a project
+import FilterTest1State from 'states/samples/FilterTest1State';
+import FilterTest2State from 'states/samples/FilterTest2State';
+// SAMPLES END
 
 const WIDTH = 480;
 const HEIGHT = 270;
@@ -14,8 +16,10 @@ class Game extends Phaser.Game
 		this.state.add('SplashState', SplashState, false);
         if (this.ENV === 'dev') {
             this.setupStatsJS();
+            // SAMPLES BEGIN - remove this part when u start working on a project
             this.state.add('FilterTest1State', FilterTest1State, false);
             this.state.add('FilterTest2State', FilterTest2State, false);
+            // SAMPLES END
             const urlParams = new URLSearchParams(window.location.search);
             const initialState = urlParams.get('state') || 'SplashState';
             this.state.start(initialState);
