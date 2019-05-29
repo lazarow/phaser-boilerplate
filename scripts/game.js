@@ -3,6 +3,7 @@ import SplashState from 'states/SplashState';
 // SAMPLES BEGIN - remove this part when u start working on a project
 import FilterTest1State from 'states/samples/FilterTest1State';
 import FilterTest2State from 'states/samples/FilterTest2State';
+import FilterTest3State from 'states/samples/FilterTest3State';
 // SAMPLES END
 
 const WIDTH = 480;
@@ -19,6 +20,7 @@ class Game extends Phaser.Game
             // SAMPLES BEGIN - remove this part when u start working on a project
             this.state.add('FilterTest1State', FilterTest1State, false);
             this.state.add('FilterTest2State', FilterTest2State, false);
+            this.state.add('FilterTest3State', FilterTest3State, false);
             // SAMPLES END
             const urlParams = new URLSearchParams(window.location.search);
             const initialState = urlParams.get('state') || 'SplashState';
