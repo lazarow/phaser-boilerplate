@@ -1,5 +1,6 @@
 import Stats from 'stats.js';
 import SplashState from 'states/SplashState';
+import FilterTestState from 'states/FilterTestState';
 
 const WIDTH = 480;
 const HEIGHT = 270;
@@ -10,9 +11,14 @@ class Game extends Phaser.Game
 		super(WIDTH, HEIGHT, Phaser.AUTO, 'content', null);
         this.ENV = '{{ENV}}';
 		this.state.add('SplashState', SplashState, false);
-		this.state.start('SplashState');
+		this.state.add('FilterTestState', FilterTestState, false);
         if (this.ENV === 'dev') {
             this.setupStatsJS();
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialState = urlParams.get('state') || 'SplashState';
+            this.state.start(initialState);
+        } else {
+            this.state.start('SplashState');
         }
 	}
     setupStatsJS() {
